@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Conservatoire Harmonia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
+        :root {
+            --primary: #2a3a6c;
+            --secondary: #6ec6ca;
+            --accent: #f7e9d7;
+            --bg: #f4f8fb;
+            --white: #fff;
+            --shadow: 0 8px 32px rgba(42,58,108,0.10);
+            --highlight: #f9b234;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--primary);
+        }
+        header {
+            background: linear-gradient(120deg, var(--primary) 60%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 64px 0 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 70px;
+            background: var(--bg);
+            border-radius: 100% 100% 0 0 / 70px 70px 0 0;
+            z-index: 1;
+            animation: wave 4s infinite linear alternate;
+        }
+        @keyframes wave {
+            0% { border-radius: 100% 100% 0 0 / 70px 70px 0 0; }
+            100% { border-radius: 90% 110% 0 0 / 80px 60px 0 0; }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3.3em;
+            letter-spacing: 2px;
+            font-weight: 700;
+            z-index: 2;
+            position: relative;
+            animation: fadeInDown 1s;
+        }
+        header p {
+            margin-top: 18px;
+            font-size: 1.3em;
+            font-weight: 400;
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1.2s;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            margin: 36px 0 0 0;
+            z-index: 2;
+            position: relative;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            padding: 10px 26px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 2px 8px rgba(42,58,108,0.07);
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        nav a.active, nav a:hover {
+            background: var(--highlight);
+            color: var(--primary);
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px rgba(249,178,52,0.13);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 48px 48px 36px 48px;
+            position: relative;
+            top: -48px;
+            z-index: 2;
+            animation: fadeInUp 1.2s;
+        }
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+            margin-bottom: 56px;
+        }
+        .about img {
+            width: 370px;
+            border-radius: 24px;
+            box-shadow: 0 6px 28px rgba(42,58,108,0.11);
+            object-fit: cover;
+            aspect-ratio: 4/3;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+            from { transform: translateY(0);}
+            to { transform: translateY(-12px);}
+        }
+        .about-text {
+            flex: 1;
+            min-width: 260px;
+        }
+        .about-text h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        .about-text p {
+            font-size: 1.18em;
+            color: #31416e;
+            line-height: 1.7;
+        }
+        .about-text .cta-btn {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 12px 32px;
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 24px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(110,198,202,0.13);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+        .about-text .cta-btn:hover {
+            background: var(--highlight);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+        .programs {
+            margin-top: 32px;
+        }
+        .programs h2 {
+            color: var(--primary);
+            margin-bottom: 24px;
+            font-size: 1.8em;
+        }
+        .program-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 36px;
+        }
+        .program-item {
+            background: var(--accent);
+            border-radius: 18px;
+            padding: 32px 20px 26px 20px;
+            box-shadow: 0 2px 14px rgba(42,58,108,0.07);
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.2s;
+        }
+        .program-item:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(42,58,108,0.14);
+        }
+        .program-item .emoji {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+            display: block;
+            animation: bounce 1.8s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(-8px);}
+        }
+        .program-item h3 {
+            margin: 0 0 12px 0;
+            color: var(--primary);
+            font-size: 1.25em;
+            font-weight: 700;
+        }
+        .program-item p {
+            margin: 0;
+            color: #3a4b7c;
+            font-size: 1em;
+        }
+        .events {
+            margin-top: 56px;
+        }
+        .events h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        .event-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .event-item {
+            background: var(--secondary);
+            color: var(--primary);
+            border-radius: 16px;
+            padding: 22px 18px;
+            min-width: 220px;
+            box-shadow: 0 2px 12px rgba(110,198,202,0.10);
+            text-align: left;
+            position: relative;
+            transition: box-shadow 0.2s, transform 0.2s;
+            animation: fadeInUp 1.4s;
+        }
+        .event-item:hover {
+            box-shadow: 0 8px 32px rgba(110,198,202,0.18);
+            transform: scale(1.03);
+        }
+        .event-item strong {
+            color: var(--highlight);
+        }
+        .contact {
+            margin-top: 64px;
+            background: var(--secondary);
+            border-radius: 18px;
+            padding: 36px 28px;
+            box-shadow: 0 2px 14px rgba(110,198,202,0.10);
+            text-align: center;
+            animation: fadeInUp 1.5s;
+        }
+        .contact h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4em;
+        }
+        .contact p {
+            font-size: 1.1em;
+            color: #31416e;
+            line-height: 1.7;
+        }
+        .contact a {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .contact .cta-btn {
+            margin-top: 18px;
+            background: var(--highlight);
+            color: var(--primary);
+            border: none;
+            border-radius: 22px;
+            padding: 10px 28px;
+            font-size: 1.08em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(249,178,52,0.10);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .contact .cta-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.04);
+        }
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            background: var(--primary);
+            color: var(--white);
+            margin-top: 56px;
+            border-radius: 0 0 28px 28px;
+            font-size: 1em;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.7s;
+        }
+        @media (max-width: 1000px) {
+            .container {
+                padding: 28px 8px 18px 8px;
+            }
+            .about img {
+                width: 100%;
+                max-width: 370px;
+            }
+        }
+        @media (max-width: 700px) {
+            .about {
+                flex-direction: column;
+                text-align: center;
+                gap: 28px;
+            }
+            .container {
+                padding: 12px 2vw 8px 2vw;
+            }
+            .program-list {
+                grid-template-columns: 1fr;
+            }
+            .event-list {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .contact {
+                padding: 20px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Conservatoire Harmonia</h1>
+        <p>Éveillez votre passion pour la musique et les arts</p>
+        <nav>
+            <a href="#about" class="active">À propos</a>
+            <a href="#programs">Programmes</a>
+            <a href="#events">Événements</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="about" id="about">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Conservatoire Harmonia">
+            <div class="about-text">
+                <h2>À propos du Conservatoire</h2>
+                <p>
+                    Le <strong>Conservatoire Harmonia</strong> est un lieu d'excellence dédié à l'enseignement de la musique, de la danse et du théâtre. Nos professeurs passionnés accompagnent petits et grands dans leur parcours artistique, du loisir à la préparation professionnelle.
+                </p>
+                <a href="#programs" class="cta-btn">Découvrir nos programmes</a>
+            </div>
+        </section>
+        <section class="programs" id="programs">
+            <h2>Nos Programmes</h2>
+            <div class="program-list">
+                <div class="program-item">
+                    <span class="emoji">🎹</span>
+                    <h3>Piano</h3>
+                    <p>Cours individuels et collectifs pour tous niveaux, du classique au jazz.</p>
+                </div>
+                <div class="program-item">
+                    <span class="emoji">🎻</span>
+                    <h3>Violon</h3>
+                    <p>Apprenez la technique et l'expression musicale avec nos professeurs diplômés.</p>
+                </div>
+                <div class="program-item">
+                    <span class="emoji">🎤</span>
+                    <h3>Chant</h3>
+                    <p>Développez votre voix et votre présence scénique, en solo ou en chorale.</p>
+                </div>
+                <div class="program-item">
+                    <span class="emoji">💃</span>
+                    <h3>Danse</h3>
+                    <p>Classique, moderne, jazz : des cours adaptés à tous les âges et niveaux.</p>
+                </div>
+                <div class="program-item">
+                    <span class="emoji">🎭</span>
+                    <h3>Théâtre</h3>
+                    <p>Ateliers d'expression, improvisation et préparation aux concours.</p>
+                </div>
+            </div>
+        </section>
+        <section class="events" id="events">
+            <h2>Événements à venir</h2>
+            <div class="event-list">
+                <div class="event-item">
+                    <strong>🎶 Concert de Printemps</strong><br>
+                    15 avril 2050 - 19h<br>
+                    Salle Harmonia<br>
+                    <em>Entrée libre</em>
+                </div>
+                <div class="event-item">
+                    <strong>🎤 Masterclass Chant</strong><br>
+                    28 avril 2050 - 14h<br>
+                    Avec Clara Dubois<br>
+                    <em>Sur inscription</em>
+                </div>
+                <div class="event-item">
+                    <strong>💃 Gala de Danse</strong><br>
+                    10 mai 2050 - 18h<br>
+                    Théâtre Municipal<br>
+                    <em>Billetterie ouverte</em>
+                </div>
+            </div>
+        </section>
+        <section class="contact" id="contact">
+            <h2>Contact & Inscriptions</h2>
+            <p>
+                📍 45 Avenue des Arts, 75000 Paris<br>
+                📞 <a href="tel:0145678910">01 45 67 89 10</a><br>
+                ✉️ <a href="mailto:info@harmonia-conservatoire.fr">info@harmonia-conservatoire.fr</a>
+            </p>
+            <p>
+                Suivez-nous :
+                <a href="#" title="Instagram">Instagram</a> ·
+                <a href="#" title="Facebook">Facebook</a>
+            </p>
+            <a href="#programs" class="cta-btn">Demander une brochure</a>
+        </section>
+    </div>
+    <footer>
+        &copy; 2050 Conservatoire Harmonia. Tous droits réservés.
+    </footer>
+    <script>
+    // Animation de navigation active
+    const navLinks = document.querySelectorAll('nav a');
+    function setActiveNav(link) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+    }
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            setActiveNav(this);
+        });
+        link.addEventListener('mouseenter', function() {
+            this.classList.add('active');
+        });
+        link.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('clicked')) {
+                setActiveNav(document.querySelector('nav a.active'));
+            }
+        });
+    });
+    // Scroll animation for anchor links
+    document.querySelectorAll('nav a, .cta-btn').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>
